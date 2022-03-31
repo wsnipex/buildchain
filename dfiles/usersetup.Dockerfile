@@ -3,6 +3,7 @@ RUN apt update && apt -y install \
         bash-completion \
         bsdmainutils \
         locales \
+        procps \
         pulseaudio-utils \
         sudo \
         unzip \
