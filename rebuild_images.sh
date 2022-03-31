@@ -1,13 +1,14 @@
 #!/bin/bash
 . ./variables.sh
 
-[ -d ${PERSISTENT_CD}/le-build ]   || mkdir -p ${PERSISTENT_CD}/le-build/scripts
-[ -d ${PERSISTENT_CD}/kodi-build ] || mkdir -p ${PERSISTENT_CD}/kodi-build/scripts
-[ -d ${PERSISTENT_CD}/kodi-devel ] || mkdir -p ${PERSISTENT_CD}/kodi-devel/scripts \
-                                               ${PERSISTENT_CD}/kodi-devel/workspaces \
-                                               ${PERSISTENT_CD}/kodi-devel/.kodi \
-                                               ${PERSISTENT_CD}/kodi-devel/.vscode-oss \
-                                               ${PERSISTENT_CD}/kodi-devel/.vscode
+[ -d ${PERSISTENT_CD}/le-build ]      || mkdir -p ${PERSISTENT_CD}/le-build/scripts
+[ -d ${PERSISTENT_CD}/android-build ] || mkdir -p ${PERSISTENT_CD}/android-build/scripts
+[ -d ${PERSISTENT_CD}/kodi-build ]    || mkdir -p ${PERSISTENT_CD}/kodi-build/scripts
+[ -d ${PERSISTENT_CD}/kodi-devel ]    || mkdir -p ${PERSISTENT_CD}/kodi-devel/scripts \
+                                                  ${PERSISTENT_CD}/kodi-devel/workspaces \
+                                                  ${PERSISTENT_CD}/kodi-devel/.kodi \
+                                                  ${PERSISTENT_CD}/kodi-devel/.vscode-oss \
+                                                  ${PERSISTENT_CD}/kodi-devel/.vscode
 
 docker pull ${BASEIMG}:${BASETAG}
 
@@ -27,6 +28,11 @@ sed -e "s|@UNAME@|${UNAME}|" \
     -e "s|@BASETAG@|${BASETAG}|" \
     ./dfiles/le-build.Dockerfile   | \
 docker build --tag ${UNAME}/le-build:${BASETAG} -
+
+sed -e "s|@UNAME@|${UNAME}|g" \
+    -e "s|@BASETAG@|${BASETAG}|" \
+    ./dfiles/android-build.Dockerfile   | \
+docker build --tag ${UNAME}/android-build:${BASETAG} -
 
 sed -e "s|@UNAME@|${UNAME}|" \
     -e "s|@BASETAG@|${BASETAG}|" \

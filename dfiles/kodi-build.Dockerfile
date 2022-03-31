@@ -1,14 +1,11 @@
 FROM @UNAME@/builders:@BASETAG@
 RUN apt update && apt -y install \
-        autoconf \
         autopoint \
         ccache \
         cmake \
-        curl \
         libasound2-dev \
         libass-dev \
         libcrossguid-dev \
-        libcurl4-openssl-dev \
         libdbus-1-dev \
         libdrm-dev \
         libegl1-mesa-dev \
