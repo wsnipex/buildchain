@@ -31,6 +31,8 @@ docker build --tag ${UNAME}/le-build:${BASETAG} -
 
 sed -e "s|@UNAME@|${UNAME}|g" \
     -e "s|@BASETAG@|${BASETAG}|" \
+    -e "s|@SDKZIP@|${SDKZIP}|" \
+    -e "s|@NDKZIP@|${NDKZIP}|" \
     ./dfiles/android-build.Dockerfile | \
 docker build --tag ${UNAME}/android-build:${BASETAG} -
 

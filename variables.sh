@@ -12,6 +12,12 @@ IDE=codium
 # mold linker tag to build
 MOLD=https://github.com/rui314/mold/tarball/v1.1
 
+# android sdk download
+SDKZIP=https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip
+
+# android ndk download
+NDKZIP=https://dl.google.com/android/repository/android-ndk-r21e-linux-x86_64.zip
+
 # set this directory where you cloned LibreElec repo to
 LEREPO=~/repos/le
 

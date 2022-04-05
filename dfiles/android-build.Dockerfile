@@ -5,11 +5,11 @@ RUN apt update && apt -y install \
         lib32z1 \
         lib32z1-dev \
         zlib1g-dev && \
-    wget https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip -qO /sdk-latest.zip && \
-    wget https://dl.google.com/android/repository/android-ndk-r21e-linux-x86_64.zip -qO /ndk21e.zip && \
+    wget @SDKZIP@ -qO /sdk.zip && \
+    wget @NDKZIP@ -qO /ndk.zip && \
     sudo -u @UNAME@ mkdir -p /home/@UNAME@/android-tools/android-sdk-linux/cmdline-tools && \
-    sudo -u @UNAME@ unzip -q /sdk-latest.zip -d /home/@UNAME@/android-tools/android-sdk-linux && \
-    sudo -u @UNAME@ unzip -q /ndk21e.zip -d /home/@UNAME@/android-tools && \
+    sudo -u @UNAME@ unzip -q /sdk.zip -d /home/@UNAME@/android-tools/android-sdk-linux && \
+    sudo -u @UNAME@ unzip -q /ndk.zip -d /home/@UNAME@/android-tools && \
     yes | \
     sudo -u @UNAME@ /home/@UNAME@/android-tools/android-sdk-linux/cmdline-tools/bin/sdkmanager \
                     --sdk_root=/home/@UNAME@/android-tools/android-sdk-linux/cmdline-tools \
@@ -26,7 +26,7 @@ RUN apt update && apt -y install \
     sudo -u @UNAME@ keytool -genkey -keystore /home/@UNAME@/.android/debug.keystore -v -alias androiddebugkey \
                             -dname "CN=Android Debug,O=Android,C=US" -keypass android -storepass android \
                             -keyalg RSA -keysize 2048 -validity 10000 && \
-    rm -rf /sdk-latest.zip /ndk21e.zip /var/lib/apt/lists/* && \
+    rm -rf /sdk.zip /ndk.zip /var/lib/apt/lists/* && \
     sudo -u @UNAME@ mkdir \
             /home/@UNAME@/.cache \
             /home/@UNAME@/.tmp
