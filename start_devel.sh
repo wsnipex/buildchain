@@ -12,6 +12,7 @@ esac
 docker run -it --rm \
     --name devel \
     --env TZ=${CONTTZ} \
+    --env LC_ALL=${CONTLCALL} \
     --user ${UNAME} \
     --workdir /home/${UNAME} \
     --privileged \

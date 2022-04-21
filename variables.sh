@@ -5,6 +5,7 @@ BASETAG=bullseye
 # dont change these
 UNAME=$( whoami )
 CONTTZ=$( cat /etc/timezone )
+CONTLCALL=C.UTF-8
 
 # choose your default ide (codium or vscode)
 IDE=codium

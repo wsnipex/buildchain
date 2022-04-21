@@ -6,6 +6,7 @@ IMAGE=kodi-build
 docker run -it --rm \
     --name build \
     --env TZ=${CONTTZ} \
+    --env LC_ALL=${CONTLCALL} \
     --user ${UNAME} \
     --workdir /home/${UNAME} \
     --hostname kodi-build \

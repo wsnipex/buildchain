@@ -6,6 +6,7 @@ IMAGE=android-build
 docker run -it --rm \
     --name android-build \
     --env TZ=${CONTTZ} \
+    --env LC_ALL=${CONTLCALL} \
     --user ${UNAME} \
     --workdir /home/${UNAME} \
     --hostname android-build \
