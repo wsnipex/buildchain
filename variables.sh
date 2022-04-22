@@ -4,7 +4,7 @@ BASETAG=bullseye
 
 # dont change these
 UNAME=$( whoami )
-CONTTZ=$( date +%Z )
+CONTTZ=$( cat /etc/timezone )
 
 # choose your default ide (codium or vscode)
 IDE=codium
