@@ -36,6 +36,10 @@ sed -e "s|@UNAME@|${UNAME}|g" \
     ./dfiles/android-build.Dockerfile | \
 docker build --tag ${UNAME}/android-build:${BASETAG} -
 
+MOLD=$( curl -s https://api.github.com/repos/rui314/mold/releases/latest | \
+        grep tarball_url | \
+        cut -d '"' -f 4 )
+
 sed -e "s|@UNAME@|${UNAME}|" \
     -e "s|@BASETAG@|${BASETAG}|" \
     -e "s|@MOLD@|${MOLD}|" \

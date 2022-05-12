@@ -10,9 +10,6 @@ CONTLCALL=C.UTF-8
 # choose your default ide (codium or vscode)
 IDE=codium
 
-# mold linker tag to build
-MOLD=https://github.com/rui314/mold/tarball/v1.1
-
 # android sdk download
 SDKZIP=https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip
 
