@@ -26,12 +26,12 @@ docker build --tag ${UNAME}/builders:${BASETAG} -
 
 sed -e "s|@UNAME@|${UNAME}|" \
     -e "s|@BASETAG@|${BASETAG}|" \
-    ./dfiles/le-build.Dockerfile   | \
+    ./dfiles/le-build.Dockerfile | \
 docker build --tag ${UNAME}/le-build:${BASETAG} -
 
 sed -e "s|@UNAME@|${UNAME}|g" \
     -e "s|@BASETAG@|${BASETAG}|" \
-    ./dfiles/android-build.Dockerfile   | \
+    ./dfiles/android-build.Dockerfile | \
 docker build --tag ${UNAME}/android-build:${BASETAG} -
 
 sed -e "s|@UNAME@|${UNAME}|" \
