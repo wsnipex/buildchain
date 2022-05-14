@@ -10,11 +10,11 @@ CONTLCALL=C.UTF-8
 # choose your default ide (codium or vscode)
 IDE=codium
 
-# android sdk download
+# android
 SDKZIP=https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip
-
-# android ndk download
 NDKZIP=https://dl.google.com/android/repository/android-ndk-r21e-linux-x86_64.zip
+PLATFORMS="platforms;android-28"
+BUILDTOOLS="build-tools;28.0.3"
 
 # set this directory where you cloned LibreElec repo to
 LEREPO=~/repos/le

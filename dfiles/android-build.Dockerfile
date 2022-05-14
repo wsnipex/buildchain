@@ -19,10 +19,10 @@ RUN apt update && apt -y install \
                     platform-tools && \
     sudo -u @UNAME@ /home/@UNAME@/android-tools/android-sdk-linux/cmdline-tools/bin/sdkmanager \
                     --sdk_root=/home/@UNAME@/android-tools/android-sdk-linux/cmdline-tools \
-                    "platforms;android-28" && \
+                    "@PLATFORMS@" && \
     sudo -u @UNAME@ /home/@UNAME@/android-tools/android-sdk-linux/cmdline-tools/bin/sdkmanager \
                     --sdk_root=/home/@UNAME@/android-tools/android-sdk-linux/cmdline-tools \
-                    "build-tools;28.0.3" && \
+                    "@BUILDTOOLS@" && \
     sudo -u @UNAME@ keytool -genkey -keystore /home/@UNAME@/.android/debug.keystore -v -alias androiddebugkey \
                             -dname "CN=Android Debug,O=Android,C=US" -keypass android -storepass android \
                             -keyalg RSA -keysize 2048 -validity 10000 && \
