@@ -1,33 +1,33 @@
 #!/bin/bash
 . ./variables.sh
 
-[ -d ${PERSISTENT_CD}/le-build ]      || mkdir -p ${PERSISTENT_CD}/le-build/scripts
-[ -d ${PERSISTENT_CD}/android-build ] || mkdir -p ${PERSISTENT_CD}/android-build/scripts
-[ -d ${PERSISTENT_CD}/kodi-build ]    || mkdir -p ${PERSISTENT_CD}/kodi-build/scripts
-[ -d ${PERSISTENT_CD}/kodi-devel ]    || mkdir -p ${PERSISTENT_CD}/kodi-devel/scripts \
-                                                  ${PERSISTENT_CD}/kodi-devel/workspaces \
-                                                  ${PERSISTENT_CD}/kodi-devel/.kodi \
-                                                  ${PERSISTENT_CD}/kodi-devel/.vscode-oss \
-                                                  ${PERSISTENT_CD}/kodi-devel/.vscode
-
-docker pull ${BASEIMG}:${BASETAG}
-
+USERSETUP_IMAGE () {
 sed -e "s|@UNAME@|${UNAME}|" \
     -e "s|@BASEIMG@|${BASEIMG}|" \
     -e "s|@BASETAG@|${BASETAG}|" \
     ./dfiles/usersetup.Dockerfile | \
 docker build --tag ${UNAME}/${BASEIMG}:${BASETAG} -
+}
 
+BUILDERS_IMAGE () {
 sed -e "s|@UNAME@|${UNAME}|" \
     -e "s|@BASEIMG@|${BASEIMG}|" \
     -e "s|@BASETAG@|${BASETAG}|" \
     ./dfiles/builders.Dockerfile | \
 docker build --tag ${UNAME}/builders:${BASETAG} -
+}
+
+LE_BUILD_IMAGE () {
+[ -d ${PERSISTENT_CD}/le-build ] || mkdir -p ${PERSISTENT_CD}/le-build/scripts
 
 sed -e "s|@UNAME@|${UNAME}|" \
     -e "s|@BASETAG@|${BASETAG}|" \
     ./dfiles/le-build.Dockerfile | \
 docker build --tag ${UNAME}/le-build:${BASETAG} -
+}
+
+ANDROID_BUILD_IMAGE () {
+[ -d ${PERSISTENT_CD}/android-build ] || mkdir -p ${PERSISTENT_CD}/android-build/scripts
 
 sed -e "s|@UNAME@|${UNAME}|g" \
     -e "s|@BASETAG@|${BASETAG}|" \
@@ -35,6 +35,10 @@ sed -e "s|@UNAME@|${UNAME}|g" \
     -e "s|@NDKZIP@|${NDKZIP}|" \
     ./dfiles/android-build.Dockerfile | \
 docker build --tag ${UNAME}/android-build:${BASETAG} -
+}
+
+KODI_BUILD_IMAGE () {
+[ -d ${PERSISTENT_CD}/kodi-build ] || mkdir -p ${PERSISTENT_CD}/kodi-build/scripts
 
 MOLD=$( curl -s https://api.github.com/repos/rui314/mold/releases/latest | \
         grep tarball_url | \
@@ -45,11 +49,21 @@ sed -e "s|@UNAME@|${UNAME}|" \
     -e "s|@MOLD@|${MOLD}|" \
     ./dfiles/kodi-build.Dockerfile | \
 docker build --tag ${UNAME}/kodi-build:${BASETAG} -
+}
+
+IDE_DEPENDS_IMAGE () {
+[ -d ${PERSISTENT_CD}/kodi-devel ] || mkdir -p ${PERSISTENT_CD}/kodi-devel/scripts \
+                                               ${PERSISTENT_CD}/kodi-devel/workspaces \
+                                               ${PERSISTENT_CD}/kodi-devel/.kodi
 
 sed -e "s|@UNAME@|${UNAME}|" \
     -e "s|@BASETAG@|${BASETAG}|" \
     ./dfiles/ide-depends.Dockerfile | \
 docker build --tag ${UNAME}/ide-depends:${BASETAG} -
+}
+
+CODIUM_IMAGE () {
+[ -d ${PERSISTENT_CD}/kodi-devel ] || mkdir -p ${PERSISTENT_CD}/kodi-devel/.vscode-oss
 
 CODIUMDEB=$( curl -s https://api.github.com/repos/VSCodium/vscodium/releases/latest | \
              grep browser_download_url | \
@@ -63,6 +77,10 @@ sed -e "s|@IDEDEB@|${CODIUMDEB}|" \
     -e "s|@IDECONFDIR@|.vscode-oss|" \
     ./dfiles/kodi-devel.Dockerfile | \
 docker build --tag ${UNAME}/kodi-devel:codium-latest -
+}
+
+VSCODE_IMAGE () {
+[ -d ${PERSISTENT_CD}/kodi-devel ] || mkdir -p ${PERSISTENT_CD}/kodi-devel/.vscode
 
 VSCODELOCATION=https://packages.microsoft.com/repos/code/pool/main/c/code/
 VSCODEPACKAGE=$( curl -s $VSCODELOCATION | \
@@ -79,3 +97,19 @@ sed -e "s|@IDEDEB@|${VSCODEDEB}|" \
     -e "s|@IDECONFDIR@|.vscode|" \
     ./dfiles/kodi-devel.Dockerfile | \
 docker build --tag ${UNAME}/kodi-devel:vscode-latest -
+}
+
+docker pull ${BASEIMG}:${BASETAG}
+
+USERSETUP_IMAGE
+BUILDERS_IMAGE
+LE_BUILD_IMAGE
+ANDROID_BUILD_IMAGE
+KODI_BUILD_IMAGE
+IDE_DEPENDS_IMAGE
+
+case "${IDE}" in
+"codium") CODIUM_IMAGE;;
+"vscode") VSCODE_IMAGE;;
+*) echo "something wrong!" && exit 1;;
+esac
