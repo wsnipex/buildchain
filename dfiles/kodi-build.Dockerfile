@@ -5,7 +5,6 @@ RUN apt update && apt -y install \
         cmake \
         libasound2-dev \
         libass-dev \
-        libcrossguid-dev \
         libdbus-1-dev \
         libdrm-dev \
         libegl1-mesa-dev \
