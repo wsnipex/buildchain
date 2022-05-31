@@ -76,7 +76,7 @@ sed -e "s|@IDEDEB@|${CODIUMDEB}|" \
     -e "s|@BASETAG@|${BASETAG}|" \
     -e "s|@IDECONFDIR@|.vscode-oss|" \
     ./dfiles/kodi-devel.Dockerfile | \
-docker build --tag ${UNAME}/kodi-devel:codium-latest -
+docker build --tag ${UNAME}/kodi-devel:${BASETAG}-codium-latest -
 }
 
 VSCODE_IMAGE () {
@@ -96,7 +96,7 @@ sed -e "s|@IDEDEB@|${VSCODEDEB}|" \
     -e "s|@BASETAG@|${BASETAG}|" \
     -e "s|@IDECONFDIR@|.vscode|" \
     ./dfiles/kodi-devel.Dockerfile | \
-docker build --tag ${UNAME}/kodi-devel:vscode-latest -
+docker build --tag ${UNAME}/kodi-devel:${BASETAG}-vscode-latest -
 }
 
 docker pull ${BASEIMG}:${BASETAG}

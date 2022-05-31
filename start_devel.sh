@@ -33,4 +33,4 @@ docker run -it --rm \
     --volume KODI-TMP-KODI:/home/${UNAME}/.kodi \
     --volume KODICACHE:/home/${UNAME}/.cache \
     --volume KODITMP:/home/${UNAME}/.tmp \
-    ${UNAME}/${IMAGE}:${IDE}-latest /bin/bash
+    ${UNAME}/${IMAGE}:${BASETAG}-${IDE}-latest /bin/bash
