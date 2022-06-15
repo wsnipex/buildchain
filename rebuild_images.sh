@@ -99,8 +99,6 @@ sed -e "s|@IDEDEB@|${VSCODEDEB}|" \
 docker build --tag ${UNAME}/kodi-devel:${BASETAG}-vscode-latest -
 }
 
-docker pull ${BASEIMG}:${BASETAG}
-
 USERSETUP_IMAGE
 BUILDERS_IMAGE
 LE_BUILD_IMAGE
