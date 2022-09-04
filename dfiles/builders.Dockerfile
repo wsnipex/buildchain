@@ -18,4 +18,6 @@ RUN apt update && apt -y install \
          >>/home/@UNAME@/.bashrc && \
     echo "export PATH=\$PATH:/home/@UNAME@/scripts" \
          >>/home/@UNAME@/.bashrc && \
+    echo "trap \"exit\" TERM" \
+         >>/home/@UNAME@/.bashrc && \
     rm -rf /var/lib/apt/lists/*
