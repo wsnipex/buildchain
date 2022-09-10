@@ -10,8 +10,8 @@ docker run -it --rm \
     --user ${UNAME} \
     --workdir /home/${UNAME} \
     --hostname libreelec-build \
-    --volume ${LEREPO}:/home/${UNAME}/LE \
-    --volume ${XBMCREPO}:/home/${UNAME}/XBMC \
+    --volume ${LEREPO}:/home/${UNAME}/libreelec \
+    --volume ${KODIREPO}:/home/${UNAME}/kodi \
     --volume ${SSHKEYS}:/home/${UNAME}/.ssh \
     --volume ${PERSISTENT_CD}/${IMAGE}/scripts:/home/${UNAME}/scripts \
     ${UNAME}/${IMAGE}:${BASETAG} /bin/bash

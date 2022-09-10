@@ -10,9 +10,9 @@ docker run -it --rm \
     --user ${UNAME} \
     --workdir /home/${UNAME} \
     --hostname android-build \
-    --volume XBMCTMP:/home/${UNAME}/.tmp \
-    --volume XBMCCACHE:/home/${UNAME}/.cache \
-    --volume ${XBMCREPO}:/home/${UNAME}/xbmc \
+    --volume KODITMP:/home/${UNAME}/.tmp \
+    --volume KODICACHE:/home/${UNAME}/.cache \
+    --volume ${KODIREPO}:/home/${UNAME}/kodi \
     --volume ${SSHKEYS}:/home/${UNAME}/.ssh \
     --volume ${PERSISTENT_CD}/${IMAGE}/scripts:/home/${UNAME}/scripts \
     ${UNAME}/${IMAGE}:${BASETAG} /bin/bash
