@@ -1,4 +1,7 @@
 #!/bin/bash
+
+which curl &> /dev/null || { echo "please install curl first!"; exit 1; }
+
 . ./variables.sh
 
 USERSETUP_IMAGE () {
