@@ -66,7 +66,7 @@ docker build --tag ${UNAME}/ide-depends:${BASETAG} -
 }
 
 CODIUM_IMAGE () {
-[ -d ${PERSISTENT_CD}/kodi-devel ] || mkdir -p ${PERSISTENT_CD}/kodi-devel/.vscode-oss
+[ -d ${PERSISTENT_CD}/kodi-devel/.vscode-oss ] || mkdir -p ${PERSISTENT_CD}/kodi-devel/.vscode-oss
 
 CODIUMDEB=$( curl -s https://api.github.com/repos/VSCodium/vscodium/releases/latest | \
              grep browser_download_url | \
@@ -83,7 +83,7 @@ docker build --tag ${UNAME}/kodi-devel:${BASETAG}-codium-latest -
 }
 
 VSCODE_IMAGE () {
-[ -d ${PERSISTENT_CD}/kodi-devel ] || mkdir -p ${PERSISTENT_CD}/kodi-devel/.vscode
+[ -d ${PERSISTENT_CD}/kodi-devel/.vscode ] || mkdir -p ${PERSISTENT_CD}/kodi-devel/.vscode
 
 VSCODELOCATION=https://packages.microsoft.com/repos/code/pool/main/c/code/
 VSCODEPACKAGE=$( curl -s $VSCODELOCATION | \
