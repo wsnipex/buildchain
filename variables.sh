@@ -12,7 +12,7 @@ IDE=codium
 
 # android
 SDKZIP=https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip
-SDKINSTALL='"platforms;android-30" "platforms;android-28" "build-tools;30.0.2" "ndk;23.1.7779620"'
+SDKINSTALL='"platforms;android-30" "build-tools;30.0.2" "ndk;23.1.7779620"'
 
 # set this directory where you cloned LibreElec repo to
 LEREPO=~/repos/le
