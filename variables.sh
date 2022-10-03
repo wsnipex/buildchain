@@ -1,4 +1,4 @@
-# choose you base image
+# choose your base image
 BASEIMG=debian
 BASETAG=bullseye
 
