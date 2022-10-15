@@ -10,8 +10,10 @@ RUN apt update && apt -y install \
         libegl1-mesa-dev \
         libegl-dev \
         libfstrcmp-dev \
+        libgbm-dev \
         libgif-dev \
         libglu1-mesa-dev \
+        libinput-dev \
         libiso9660-dev \
         libiso9660++-dev \
         libjpeg-dev \
@@ -31,6 +33,7 @@ RUN apt update && apt -y install \
         libva-dev \
         libx11-dev \
         libxext-dev \
+        libxkbcommon-dev \
         libxml2-dev \
         libxrandr-dev \
         libxslt-dev \
