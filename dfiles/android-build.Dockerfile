@@ -19,6 +19,7 @@ RUN apt update && apt -y install \
                             -dname "CN=Android Debug,O=Android,C=US" -keypass android -storepass android \
                             -keyalg RSA -keysize 2048 -validity 10000 && \
     rm -rf /sdk.zip /ndk.zip /var/lib/apt/lists/* && \
+    ln -s /home/@UNAME@/android-tools/android-sdk-linux/cmdline-tools/platform-tools/adb /usr/local/bin/adb && \
     sudo -u @UNAME@ mkdir \
             /home/@UNAME@/.cache \
             /home/@UNAME@/.tmp
