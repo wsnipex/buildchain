@@ -42,10 +42,13 @@ RUN apt update && apt -y install \
         pkg-config \
         rapidjson-dev \
         swig && \
-    mkdir /mold && wget @MOLD@ -qO - | \
+    mkdir -p /mold/build && wget @MOLD@ -qO - | \
           tar --strip-components=1 --directory=/mold -xz && \
-    make --directory=/mold && \
-    make --directory=/mold install && \
+    cd /mold/build && \
+    cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=c++ /mold && \
+    cmake --build . -j $(getconf _NPROCESSORS_ONLN) && \
+    cmake --install . && \
+    cd / && \
     rm -rf /mold /var/lib/apt/lists/* && \
     sudo -u @UNAME@ mkdir \
         /home/@UNAME@/.cache \
