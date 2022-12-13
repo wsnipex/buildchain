@@ -21,7 +21,6 @@ RUN apt update && apt -y install \
         libmariadb-dev \
         libmicrohttpd-dev \
         libpulse-dev \
-        libpython2.7-dev \
         libpython3-dev \
         libsqlite3-dev \
         libssl-dev \
