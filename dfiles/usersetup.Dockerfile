@@ -28,6 +28,4 @@ RUN apt update && apt -y install \
     sed -i "s|; autospawn = yes|autospawn = no|" /etc/pulse/client.conf && \
     sed -i "s|; daemon-binary = /usr/bin/pulseaudio|daemon-binary = /bin/true|" /etc/pulse/client.conf && \
     sed -i "s|; enable-shm = yes|enable-shm = false|" /etc/pulse/client.conf && \
-    rm -rf /usr/share/man/?? && \
-    rm -rf /usr/share/man/??_* && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /usr/share/man/?? /usr/share/man/??_* /var/lib/apt/lists/*

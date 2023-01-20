@@ -54,18 +54,14 @@ sed -e "s|@UNAME@|${UNAME}|" \
 docker build --tag ${UNAME}/kodi-build:${BASETAG} -
 }
 
-IDE_DEPENDS_IMAGE () {
+DEVEL_DIRECTORIES () {
 [ -d ${PERSISTENT_CD}/kodi-devel ] || mkdir -p ${PERSISTENT_CD}/kodi-devel/scripts \
                                                ${PERSISTENT_CD}/kodi-devel/workspaces \
                                                ${PERSISTENT_CD}/kodi-devel/.kodi
-
-sed -e "s|@UNAME@|${UNAME}|" \
-    -e "s|@BASETAG@|${BASETAG}|" \
-    ./dfiles/ide-depends.Dockerfile | \
-docker build --tag ${UNAME}/ide-depends:${BASETAG} -
 }
 
 CODIUM_IMAGE () {
+DEVEL_DIRECTORIES
 [ -d ${PERSISTENT_CD}/kodi-devel/.vscode-oss ] || mkdir -p ${PERSISTENT_CD}/kodi-devel/.vscode-oss
 
 CODIUMDEB=$( curl -s https://api.github.com/repos/VSCodium/vscodium/releases/latest | \
@@ -83,6 +79,7 @@ docker build --tag ${UNAME}/kodi-devel:${BASETAG}-codium-latest -
 }
 
 VSCODE_IMAGE () {
+DEVEL_DIRECTORIES
 [ -d ${PERSISTENT_CD}/kodi-devel/.vscode ] || mkdir -p ${PERSISTENT_CD}/kodi-devel/.vscode
 
 VSCODELOCATION=https://packages.microsoft.com/repos/code/pool/main/c/code/
@@ -107,7 +104,6 @@ BUILDERS_IMAGE
 LE_BUILD_IMAGE
 ANDROID_BUILD_IMAGE
 KODI_BUILD_IMAGE
-IDE_DEPENDS_IMAGE
 
 case "${IDE}" in
 "codium") CODIUM_IMAGE;;
