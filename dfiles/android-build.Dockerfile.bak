@@ -9,11 +9,15 @@ RUN apt update && apt -y install \
         zlib1g-dev && \
     wget @SDKZIP@ -qO /sdk.zip && \
     sudo -u @UNAME@ mkdir -p /home/@UNAME@/android-tools/android-sdk-linux/cmdline-tools && \
-    sudo -u @UNAME@ unzip -q /sdk.zip -d /home/@UNAME@/android-tools/android-sdk-linux/cmdline-tools/latest && \
-    mv /home/@UNAME@/android-tools/android-sdk-linux/cmdline-tools/latest/cmdline-tools/* /home/@UNAME@/android-tools/android-sdk-linux/cmdline-tools/latest/ && \
+    sudo -u @UNAME@ unzip -q /sdk.zip -d /home/@UNAME@/android-tools/android-sdk-linux/latest && \
+    mv /home/@UNAME@/android-tools/android-sdk-linux/latest/cmdline-tools/* /home/@UNAME@/android-tools/android-sdk-linux/latest/ && \
     yes | \
-    sudo -u @UNAME@ /home/@UNAME@/android-tools/android-sdk-linux/cmdline-tools/latest/bin/sdkmanager --licenses && \
-    sudo -u @UNAME@ /home/@UNAME@/android-tools/android-sdk-linux/cmdline-tools/latest/bin/sdkmanager @SDKINSTALL@ && \
+    sudo -u @UNAME@ /home/@UNAME@/android-tools/android-sdk-linux/cmdline-tools/bin/sdkmanager \
+                    --sdk_root=/home/@UNAME@/android-tools/android-sdk-linux/cmdline-tools \
+                    --licenses && \
+    sudo -u @UNAME@ /home/@UNAME@/android-tools/android-sdk-linux/cmdline-tools/bin/sdkmanager \
+                    --sdk_root=/home/@UNAME@/android-tools/android-sdk-linux/cmdline-tools \
+                    @SDKINSTALL@ && \
     sudo -u @UNAME@ keytool -genkey -keystore /home/@UNAME@/.android/debug.keystore -v -alias androiddebugkey \
                             -dname "CN=Android Debug,O=Android,C=US" -keypass android -storepass android \
                             -keyalg RSA -keysize 2048 -validity 10000 && \

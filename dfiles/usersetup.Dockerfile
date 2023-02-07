@@ -2,6 +2,7 @@ FROM @BASEIMG@:@BASETAG@
 RUN apt update && apt -y install \
         bash-completion \
         bsdmainutils \
+        ccache \
         locales \
         procps \
         pulseaudio-utils \
@@ -10,7 +11,7 @@ RUN apt update && apt -y install \
         vim-tiny \
         wget \
         zip && \
-    useradd -ms /bin/bash @UNAME@ && \
+    useradd -u 1005 -ms /bin/bash @UNAME@ && \
     usermod -aG cdrom,floppy,sudo,audio,dip,video,plugdev @UNAME@ && \
     echo "@UNAME@ ALL=(ALL:ALL) NOPASSWD: ALL" \
          >/etc/sudoers.d/@UNAME@ && \
